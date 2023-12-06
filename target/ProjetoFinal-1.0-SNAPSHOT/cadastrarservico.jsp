@@ -1,7 +1,7 @@
 <%@page pageEncoding="utf-8" %>
 <%@include file="WEB-INF/cabecalho.jsp"%>
 <main>
-    <h1>Cadastro de Serviço</h1>
+    <h1> Serviços</h1>
     <form action="servico" method="post">
         <label for="id">ID:</label>
         <input type="text" id="id" name="id"><br><br>

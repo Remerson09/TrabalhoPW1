@@ -16,7 +16,7 @@ import java.io.IOException;
 public class DeletarAparelho extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String aparelhoIdParam = request.getParameter("aparelhoId");
+            String aparelhoIdParam = request.getParameter("id");
 
             if (Validador.temConteudo(aparelhoIdParam)) {
                 int aparelhoId = Integer.parseInt(aparelhoIdParam);

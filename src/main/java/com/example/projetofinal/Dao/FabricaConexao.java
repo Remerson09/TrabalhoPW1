@@ -8,7 +8,7 @@ public class FabricaConexao {
     public static Connection pegaConexao() throws ErroDao{
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda?useSSL=false","root","aluno");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/Servico?useSSL=false","root","aluno");
         } catch (ClassNotFoundException | SQLException e) {
             throw new ErroDao(e);
         }

@@ -5,8 +5,8 @@
     <a href="listarcliente">Lista Cliente</a>
     <a href="editarcliente.jsp">Editar Cliente</a>
     <a href="cadastrarservico.jsp">Serviços</a>
-    <a href="editarservico.jsp">Editar Serviço</a>
     <a href="listaservico">Listar servico</a>
+    <a href="editarservico.jsp">Editar Serviço</a>
     <a href="aparelho.jsp">Aparelho</a>
     <a href="listaaparelho.jsp">Listar Aparelho</a>
     <a href="sair">Sair</a>
