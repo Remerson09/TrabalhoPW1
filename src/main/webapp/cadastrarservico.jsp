@@ -1,10 +1,8 @@
-<%@page pageEncoding="utf-8" %>
-<%@include file="WEB-INF/cabecalho.jsp"%>
+<%@ page pageEncoding="utf-8" %>
+<%@ include file="WEB-INF/cabecalho.jsp" %>
 <main>
     <h1> Serviços</h1>
     <form action="servico" method="post">
-        <label for="id">ID:</label>
-        <input type="text" id="id" name="id"><br><br>
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome"><br><br>
 
@@ -17,4 +15,4 @@
         <input type="submit" value="Enviar">
     </form>
 </main>
-<%@include file="WEB-INF/rodape.jsp"%>
+<%@ include file="WEB-INF/rodape.jsp" %>

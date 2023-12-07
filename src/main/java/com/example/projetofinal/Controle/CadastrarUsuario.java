@@ -17,17 +17,19 @@ public class CadastrarUsuario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
 
+        String nome = request.getParameter("nome");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
 
-        if (Validador.temConteudo(login) && Validador.temConteudo(senha)) {
+        if (Validador.temConteudo(nome) && Validador.temConteudo(login) && Validador.temConteudo(senha)) {
             try {
-                Usuario usuario = new Usuario(login, senha);
+                Usuario usuario = new Usuario(nome, login, senha);
                 UsuarioDaoInterface usuarioDao = new UsuarioDaoClasse();
                 usuarioDao.inserir(usuario);
                 response.sendRedirect("index.jsp?mensagem=Cadastrado-comSucesso");
             } catch (Exception e) {
-                response.sendRedirect("index.jsp?mensagem=falhaaotentarcadastrar");
+                e.printStackTrace();
+                response.sendRedirect("index.jsp?mensagem=falhaaotentarlogar");
             }
         } else {
             response.sendRedirect("index.jsp?mensagem=faltaparametros");

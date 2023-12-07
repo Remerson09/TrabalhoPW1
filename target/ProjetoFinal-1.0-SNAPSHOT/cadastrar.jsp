@@ -3,6 +3,7 @@
 
 <main>
     <h2>Cadastro de Cliente</h2>
+
     <form action="cadastrar" method="post">
         <label>Nome:
             <input type="text" name="nome" placeholder="nome">

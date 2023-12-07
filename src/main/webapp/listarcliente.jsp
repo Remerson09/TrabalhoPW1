@@ -1,5 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.example.projetofinal.Modelo.Cliente" %>
-<%@ page import="java.util.Set" %>
 <%@ include file="WEB-INF/cabecalho.jsp" %>
 <%@ page pageEncoding="utf-8" %>
 <main>
@@ -14,29 +14,23 @@
         </tr>
         </thead>
         <tbody>
-        <%
-            Set<Cliente> clientes = (Set<Cliente>) request.getAttribute("clientes");
-            for (Cliente cliente : clientes) {
-        %>
-        <tr>
-            <td><%= cliente.getId() %></td>
-            <td><%= cliente.getNome() %></td>
-            <td><%= cliente.getEndereco() %></td>
-            <td><%= cliente.getTelefone() %></td>
-            <td>
-                <a href="editarcliente.jsp?clienteId=<%= cliente.getId() %>">Editar</a>
-                <form action="deletarcliente" method="POST" style="display: inline;">
-                    <input type="hidden" name="clienteId" value="<%= cliente.getId() %>">
-                    <button type="submit">Deletar</button>
-                </form>
-            </td>
-        </tr>
-        <%
-            }
-        %>
+        <c:forEach var="cliente" items="${clientes}">
+            <tr>
+                <td><c:out value="${cliente.id}" /></td>
+                <td><c:out value="${cliente.nome}" /></td>
+                <td><c:out value="${cliente.endereco}" /></td>
+                <td><c:out value="${cliente.telefone}" /></td>
+                <td>
+                    <a href="editarcliente.jsp?clienteId=${cliente.id}">Editar</a>
+                    <form action="deletarcliente" method="POST" style="display: inline;">
+                        <input type="hidden" name="clienteId" value="${cliente.id}">
+                        <button type="submit">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </main>
-
 
 <%@ include file="WEB-INF/rodape.jsp" %>

@@ -19,25 +19,29 @@ import java.io.IOException;
 public class Logar extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
+        String nome =request.getParameter("nome");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
 
         if (Validador.temConteudo(login) && Validador.temConteudo(senha)) {
             try (UsuarioDaoInterface dao = new UsuarioDaoClasse()) {
+                // Verificar se o usuário existe no banco de dados
                 Usuario usuario = dao.buscarPorLogin(login);
 
-                if (usuario != null && usuario.getSenha().equals(senha)) {
+                if (usuario != null) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("usuario", usuario);
-                    response.sendRedirect("cadastrar.jsp?mensagem=logadocomsucesso");
+                    session.setAttribute("usuarioLogado", usuario.getLogin());
+                    response.sendRedirect("index.jsp");
                 } else {
-                    response.sendRedirect("index.jsp?mensagem=loginousenhaincorretos");
+                    // Redirecionar para a página de erro caso as credenciais sejam inválidas
+                    response.sendRedirect("erro.jsp?mensagem=CredenciaisInvalidas");
                 }
             } catch (Exception e) {
-                response.sendRedirect("index.jsp?mensagem=erroaotentarlogar");
+                // Lidar com exceções ou erros de forma apropriada
+                response.sendRedirect("erro.jsp?mensagem=ErroGeral");
             }
         } else {
-            response.sendRedirect("index.jsp?mensagem=faltaparametros");
+            response.sendRedirect("index.jsp?mensagem=FaltamParametros");
         }
     }
 }

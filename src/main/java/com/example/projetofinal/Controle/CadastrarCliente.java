@@ -5,14 +5,14 @@ import com.example.projetofinal.Dao.ClienteDaoInterface;
 import com.example.projetofinal.Dao.ErroDao;
 import com.example.projetofinal.Modelo.Cliente;
 import com.example.projetofinal.Util.Validador;
-import jakarta.servlet.ServletContext;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+
 
 import java.io.IOException;
 
@@ -30,8 +30,10 @@ public class CadastrarCliente  extends HttpServlet {
                     clienteDao.inserir(cliente);
                     response.sendRedirect("listarcliente"); // Redireciona para a listagem de clientes após o cadastro
                 } catch (ErroDao e) {
+                    e.printStackTrace(); // Isso imprimirá o rastreamento da pilha para ajudar a identificar o erro específico
                     response.sendRedirect("index.jsp?mensagem=falhaaotentarcadastrar");
                 } catch (Exception e) {
+                    e.printStackTrace(); // Isso imprimirá o rastreamento da pilha para ajudar a identificar o erro específico
                     response.sendRedirect("index.jsp?mensagem=falhaaotentarcadastrar");
                 }
             } else {

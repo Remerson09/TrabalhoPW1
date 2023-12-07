@@ -15,12 +15,13 @@ import java.io.IOException;
 public class teste extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nome = request.getParameter("nomr");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
 
         if (login != null && senha != null) {
             try (UsuarioDaoInterface dao = new UsuarioDaoClasse()) {
-                Usuario u = new Usuario(login, senha);
+                Usuario u = new Usuario( nome, login, senha);
                 dao.inserir(u);
                 response.getWriter().println("Usuário inserido com sucesso: " + u);
             } catch (Exception e) {

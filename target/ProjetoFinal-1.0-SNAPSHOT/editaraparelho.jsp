@@ -1,33 +1,28 @@
-
-<%@page pageEncoding="utf-8" %>
-<%@include file="WEB-INF/cabecalho.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page pageEncoding="utf-8" %>
+<%@ include file="WEB-INF/cabecalho.jsp" %>
 <main>
-<h1>Editar Aparelho</h1>
+    <c:if test="${not empty param.aparelhoId}">
+        <%-- Importando o AparelhoDaoClasse e buscando o aparelho por ID --%>
+        <jsp:useBean id="aparelhoDao" class="com.example.projetofinal.Dao.AparelhoDaoClasse" />
+        <jsp:useBean id="aparelho" class="com.example.projetofinal.Modelo.Aparelho" />
 
-<%-- Recuperando mensagens, se houver --%>
-<c:if test="${not empty param.mensagem}">
-    <p>${param.mensagem}</p>
-</c:if>
+        <%-- Buscando o aparelho pelo ID --%>
+        <c:set var="aparelhoId" value="${param.aparelhoId}" />
+        <c:set var="aparelho" value="${aparelhoDao.buscarPorId(aparelhoId)}" />
 
-<%-- Formulário para editar aparelho --%>
-<form method="post" action="editaraparelho">
-    <label for="aparelhoId">ID do Aparelho:</label>
-    <input type="text" id="aparelhoId" name="aparelhoId" required><br><br>
-
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" required><br><br>
-
-    <label for="modelo">Modelo:</label>
-    <input type="text" id="modelo" name="modelo" required><br><br>
-
-    <label for="marca">Marca:</label>
-    <input type="text" id="marca" name="marca" required><br><br>
-
-    <label for="numeroSerie">Número de Série:</label>
-    <input type="text" id="numeroSerie" name="numeroSerie" required><br><br>
-
-    <input type="submit" value="Editar">
-</form>
+        <c:if test="${aparelho ne null}">
+            <h2>Editar Aparelho</h2>
+            <form action="editaraparelho" method="POST">
+                ID do Aparelho: ${aparelho.id}<br> <!-- Mostra o ID do aparelho de forma estática -->
+                <input type="hidden" name="aparelhoId" value="${aparelho.id}"><br> <!-- Envia o ID como hidden -->
+                Nome: <input type="text" name="nome" value="${aparelho.nome}"><br><br>
+                Modelo: <input type="text" name="modelo" value="${aparelho.modelo}"><br><br>
+                Marca: <input type="text" name="marca" value="${aparelho.marca}"><br><br>
+                Número de Série: <input type="text" name="numeroSerie" value="${aparelho.numeroSerie}"><br><br>
+                <input type="submit" value="Salvar">
+            </form>
+        </c:if>
+    </c:if>
 </main>
-
-<%@include file="WEB-INF/rodape.jsp"%>
+<%@ include file="WEB-INF/rodape.jsp" %>

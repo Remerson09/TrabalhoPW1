@@ -43,10 +43,13 @@ public class EditarCliente extends HttpServlet {
             } else {
                 response.sendRedirect("editarcliente.jsp?mensagem=DadosIncompletos");
             }
+        } catch (NumberFormatException ex) {
+            response.sendRedirect("erro.jsp?mensagem=IDInvalido");
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(); // Aqui você pode logar o erro para depuração
             response.sendRedirect("editarcliente.jsp?mensagem=ErroGeral");
         }
     }
 }
+
 

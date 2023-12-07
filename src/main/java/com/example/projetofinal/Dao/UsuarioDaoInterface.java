@@ -8,7 +8,9 @@ import java.util.List;
 public interface UsuarioDaoInterface extends  AutoCloseable{
 
     void inserir(Usuario usuario) throws Exception;
-    Usuario buscar(String login, String senha);
 
-    Usuario buscarPorLogin(String login);
+    Usuario buscarPorLogin(String login) throws ErroDao;
+
+    Usuario buscarPorId(int id) throws ErroDao;
+
 }

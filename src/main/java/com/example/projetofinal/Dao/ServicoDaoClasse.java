@@ -78,7 +78,20 @@ public class ServicoDaoClasse implements ServicoDaoInterface{
         }
         return false;
     }
+    public int buscarIdPorNome(String nome) throws ErroDao {
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT id FROM servico WHERE nome = ?");
+            stm.setString(1, nome);
+            ResultSet rs = stm.executeQuery();
 
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
+        return 0;
+    }
     @Override
     public int gerarNovoId() {
         try {
@@ -117,6 +130,26 @@ public class ServicoDaoClasse implements ServicoDaoInterface{
         }
 
         return servicos;
+    }
+
+    @Override
+    public Servico buscarPorId(int id) throws ErroDao {
+        try {
+            PreparedStatement stm = con.prepareStatement("SELECT * FROM servico WHERE id = ?");
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                String nome = rs.getString("nome");
+                String descricao = rs.getString("descricao");
+                String valor = rs.getString("valor");
+
+                return new Servico(id, nome, descricao, valor);
+            }
+        } catch (SQLException e) {
+            throw new ErroDao(e);
+        }
+        return null;
     }
 
     @Override
